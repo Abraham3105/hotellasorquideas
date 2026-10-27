@@ -3,7 +3,7 @@ const path = require('node:path');
 const { validateBooking } = require('../models/booking');
 async function home(req, res) {
   let html = await fs.readFile(path.join(__dirname, '../views/index.html'), 'utf8');
-  const sections = { NavigationBar:'header', MobileNavDrawer:'menu', HeroSection:'hero', QuickBookingSearch:'reservas', HighlightsSection:'experiencias', AccommodationSection:'habitaciones', PhotoGallery:'galeria', LocationSection:'ubicacion', TestimonialsSection:'testimonios', BottomNavigationMobile:'navegacion', MainFooter:'footer' };
+  const sections = { NavigationBar:'header', MobileNavDrawer:'menu', HeroSection:'hero', QuickBookingSearch:'reservas', HighlightsSection:'experiencias', AccommodationSection:'habitaciones', PetFriendlySection:'petfriendly', PhotoGallery:'galeria', LocationSection:'ubicacion', TestimonialsSection:'testimonios', BottomNavigationMobile:'navegacion', MainFooter:'footer' };
   for (const [marker, file] of Object.entries(sections)) {
     const partial = await fs.readFile(path.join(__dirname, '../views/pages', file + '.html'), 'utf8');
     html = html.replace(new RegExp(`<!-- BEGIN: ${marker} -->[\\s\\S]*?<!-- END: ${marker} -->`), () => partial);

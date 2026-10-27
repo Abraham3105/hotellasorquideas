@@ -314,3 +314,15 @@ body .room-dialog-top .eyebrow{font-size:10px}
 .visit-booking-button:hover{background:#eed4e8}
 @media(max-width:800px){.visit-inner{padding:38px 28px;gap:30px}.visit-location{padding-right:30px}.visit-section h2{font-size:29px}.visit-booking>p{padding-top:29px}}
 @media(max-width:580px){.visit-inner{grid-template-columns:1fr;gap:28px;padding:32px 24px}.visit-location{border-right:0;border-bottom:1px solid #ffffff26;padding:0 0 28px}.visit-booking>p{padding-top:0}.visit-section h2{font-size:28px;margin-bottom:16px}.visit-section p{margin-bottom:20px}.visit-section .button{width:100%;min-width:0}.visit-section .eyebrow{margin-bottom:9px}}
+
+/* Mascotas bienvenidas: fotografía real con altura limitada. */
+.pet-friendly{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding-top:35px;padding-bottom:65px}
+.pet-photo{height:420px;overflow:hidden;border-radius:6px;background:#e4e9da}
+.pet-photo img{width:100%;height:100%;object-fit:cover;object-position:center 56%}
+.pet-content h2{font-size:42px;line-height:1.15;letter-spacing:-1px;margin-bottom:24px}
+.pet-content>p{font-size:13px;color:var(--muted);max-width:410px;margin-bottom:18px}
+.pet-content>.pet-inquiry{font-size:12px;line-height:1.8}
+.pet-content .button{margin-top:10px;background:var(--orchid)}
+.pet-content .button:hover{background:var(--orchid-dark)}
+@media(max-width:1000px){.desktop-nav{gap:17px}.pet-friendly{gap:35px}.pet-content h2{font-size:37px}}
+@media(max-width:700px){.pet-friendly{grid-template-columns:1fr;gap:28px;padding-top:25px;padding-bottom:40px}.pet-photo{height:330px}.pet-content h2{font-size:34px}.pet-content h2 br{display:none}.pet-content>p{max-width:none}.pet-content .button{width:100%}}
