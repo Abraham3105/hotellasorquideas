@@ -33,17 +33,22 @@ function syncDates() {
 }
 arrival.addEventListener('change', syncDates);
 const output = document.createElement('p'); output.setAttribute('role','status'); output.hidden = true; output.className = 'booking-result'; form.append(output);
-form.addEventListener('submit', async event => {
+form.addEventListener('submit', event => {
   event.preventDefault(); syncDates(); if (!form.reportValidity()) return;
   output.hidden = false;
   if (departure.value <= arrival.value) { output.textContent = 'La salida debe ser posterior a la llegada.'; return; }
-  output.textContent = 'Consultando fechas…';
-  try {
-    if (location.protocol === 'file:') throw new Error('static');
-    const response = await fetch('/api/availability?' + new URLSearchParams(new FormData(form)));
-    const result = await response.json();
-    output.textContent = result.error || `${result.room ? result.room + ' · ' : ''}${result.nights} noche(s). ${result.message}`;
-  } catch { output.textContent = 'Para consultar fechas, iniciá el proyecto con npm start. La disponibilidad debe confirmarse con el hotel.'; }
+  const data = new FormData(form);
+  const formatDate = value => value.split('-').reverse().join('/');
+  const message = [
+    'Hola, Hotel Las Orquídeas. Quisiera consultar disponibilidad.',
+    `Alojamiento: ${data.get('room') || 'Sin preferencia'}`,
+    `Llegada: ${formatDate(arrival.value)}`,
+    `Salida: ${formatDate(departure.value)}`,
+    `Huéspedes: ${data.get('guests')}`,
+    '¿Me pueden confirmar disponibilidad y tarifa con desayuno incluido?'
+  ].join('\n');
+  output.textContent = 'Continuá en WhatsApp para confirmar disponibilidad con el hotel. Esta consulta no crea una reserva.';
+  window.location.assign('https://wa.me/50686641703?text=' + encodeURIComponent(message));
 });
 document.querySelectorAll('.nav-item[href^="#"]').forEach(item => item.addEventListener('click', () => {
   document.querySelectorAll('.nav-item[href^="#"]').forEach(link => { link.classList.remove('active','text-forest-800','font-semibold'); link.classList.add('text-gray-500'); link.removeAttribute('aria-current'); });

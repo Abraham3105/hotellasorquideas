@@ -240,3 +240,17 @@ body .room-dialog-top .eyebrow{font-size:10px}
 .location-map-footer a{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
 @media(max-width:800px){.location-address-bar{padding:22px;gap:14px}.location-address-text h3{font-size:16px}.location-refined .location-map{height:370px}.location-directions{padding:13px 18px;gap:15px}}
 @media(max-width:520px){.location-refined{padding-top:30px;padding-bottom:35px}.location-heading{display:block;margin-bottom:22px}.location-heading>p{margin-top:17px}.location-address-bar{display:grid;grid-template-columns:24px 1fr;padding:20px;gap:12px}.location-address-text h3{font-size:16px}.location-address-text p{font-size:11px}.location-directions{grid-column:1/-1;margin-top:6px;justify-content:center;width:100%;min-height:44px}.location-refined .location-map{height:320px}.location-map-footer{padding:14px 18px;align-items:flex-start;gap:12px;font-size:9px}.location-map-footer>a{white-space:nowrap}}
+
+/* Ubicación y cierre compactos, sin espacio reservado para el mapa retirado. */
+.location-refined{padding-top:45px;padding-bottom:30px}
+.location-refined .location-heading{margin-bottom:22px}
+.location-refined .location-heading h2{font-size:34px}
+.location-refined .location-frame{background:transparent;border:0;border-radius:0;box-shadow:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.location-refined .location-address-bar{padding:23px 0}
+.closing-compact{display:flex;align-items:center;justify-content:space-between;gap:30px;text-align:left;padding-top:35px;padding-bottom:55px}
+.closing-compact .eyebrow{margin-bottom:10px}
+.closing-compact h2{font-size:34px;letter-spacing:-.7px;line-height:1.2}
+.closing-compact p{margin:12px 0 0;font-size:12px;color:var(--muted)}
+.closing-compact>.button{flex-shrink:0}
+@media(max-width:520px){.location-refined{padding-top:30px;padding-bottom:15px}.location-refined .location-heading h2{font-size:30px}.location-refined .location-address-bar{padding:20px 0}.closing-compact{display:block;padding-top:25px;padding-bottom:40px}.closing-compact h2{font-size:29px}.closing-compact>.button{margin-top:23px;width:100%}}
+.hotel-whatsapp{display:inline-block;font-size:12px;color:var(--orchid-dark);margin:0 0 22px;text-decoration:underline;text-underline-offset:4px}
