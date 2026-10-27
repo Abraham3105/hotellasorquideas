@@ -1,0 +1,8 @@
+{
+  "name": "hotel-las-orquideas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hotel Las Orquídeas — base MVC",
+  "scripts": { "start": "node server.js", "check": "node --check server.js && node --check controllers/homeController.js && node --check models/booking.js && node --check views/assets/js/app.js" },
+  "engines": { "node": ">=20" }
+}
