@@ -4,7 +4,7 @@
   const track = section.querySelector('.room-grid');
   const rooms = [];
   const descriptions = [
-    ['Cabina 5', 'Cabina para una o dos personas, con cama matrimonial y balcón.', ['Cama matrimonial', 'Baño privado', 'Balcón', 'Agua caliente', 'Parqueo']],
+    ['Cabina 5', 'Cabina para una persona o pareja, con cama matrimonial y balcón.', ['Individual o pareja', 'Cama matrimonial', 'Baño privado', 'Balcón', 'Agua caliente', 'Parqueo']],
     ['Una escapada para compartir.', 'Disfrutá de Tarrazú en pareja o en un grupo de tres personas.', ['Hasta 3 personas', 'Desayuno incluido']],
     ['Cabina 7', 'Alojamiento para hasta cuatro personas, con balcón y área de cocina.', ['Hasta 4 personas', 'Balcón', 'Área de cocina', 'Desayuno incluido']],
     ['Un estudio para dos.', 'Elegí una escapada entre semana o disfrutá del fin de semana en pareja.', ['Para parejas', 'Desayuno incluido']],
@@ -134,6 +134,9 @@
     modal.querySelector('[data-room-name]').textContent = room.name;
     modal.querySelector('h2').textContent = room.title;
     modal.querySelector('[data-room-description]').textContent = room.description;
+    modal.querySelector('.room-disclaimer').textContent = ['Cabina 5', 'Estudio pareja'].includes(room.name)
+      ? 'Alojamiento individual o para pareja. Tarifa individual ₡22.000. Precios por noche con desayuno incluido. Disponibilidad sujeta a confirmación.'
+      : 'Precios por noche con desayuno incluido. Tarifa individual de ₡22.000. Disponibilidad sujeta a confirmación.';
     thumbs.replaceChildren(); thumbs.hidden = !room.photos;
     photoArea.classList.toggle('has-gallery', Boolean(room.photos));
     (room.photos || []).forEach((photo, i) => {
@@ -174,8 +177,15 @@
   const choice = document.createElement('select'); choice.id = 'room-choice'; choice.name = 'room';
   ['Sin preferencia', ...rooms.map(room => room.name)].forEach(name => { const option = document.createElement('option'); option.value = name === 'Sin preferencia' ? '' : name; option.textContent = name; choice.append(option); });
   field.append(label, choice); form.insertBefore(field, form.querySelector('button[type="submit"]'));
+  function syncRoomGuests() {
+    const coupleOnly = ['Cabina 5', 'Estudio pareja'].includes(choice.value);
+    const guests = form.elements.guests;
+    [...guests.options].forEach(option => { option.disabled = coupleOnly && !['1 Huésped', '2 Huéspedes (Pareja)'].includes(option.value); option.hidden = option.disabled; });
+    if (coupleOnly && !['1 Huésped', '2 Huéspedes (Pareja)'].includes(guests.value)) guests.value = '2 Huéspedes (Pareja)';
+  }
+  choice.addEventListener('change', syncRoomGuests);
   modal.querySelector('.room-inquire').addEventListener('click', () => {
-    choice.value = rooms[selected].name; modal.close();
+    choice.value = rooms[selected].name; syncRoomGuests(); modal.close();
     document.getElementById('reservas').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
     document.getElementById('arrival').focus({preventScroll:true});
   });

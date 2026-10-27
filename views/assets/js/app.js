@@ -38,6 +38,9 @@ form.addEventListener('submit', event => {
   output.hidden = false;
   if (departure.value <= arrival.value) { output.textContent = 'La salida debe ser posterior a la llegada.'; return; }
   const data = new FormData(form);
+  if (['Cabina 5', 'Estudio pareja'].includes(data.get('room')) && !['1 Huésped', '2 Huéspedes (Pareja)'].includes(data.get('guests'))) {
+    output.textContent = 'La Cabina 5 y el Estudio admiten una persona o pareja.'; return;
+  }
   const formatDate = value => value.split('-').reverse().join('/');
   const message = [
     'Hola, Hotel Las Orquídeas. Quisiera consultar disponibilidad.',

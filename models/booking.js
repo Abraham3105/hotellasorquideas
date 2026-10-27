@@ -7,6 +7,7 @@ function validateBooking(data) {
   if (data.arrival < today()) return { error: 'La llegada no puede estar en el pasado.' };
   if (data.departure <= data.arrival) return { error: 'La salida debe ser posterior a la llegada.' };
   if (!guests.includes(data.guests)) return { error: 'Seleccioná la cantidad de huéspedes.' };
+  if (['Cabina 5', 'Estudio pareja'].includes(data.room) && !['1 Huésped', '2 Huéspedes (Pareja)'].includes(data.guests)) return { error: 'La Cabina 5 y el Estudio admiten una persona o pareja.' };
   return { status: 'inquiry', room: data.room || null, nights: (Date.parse(data.departure) - Date.parse(data.arrival)) / 86400000, message: 'Fechas válidas. La disponibilidad y la tarifa deben confirmarse con el hotel; esta consulta no crea una reserva.' };
 }
 module.exports = { validateBooking };
